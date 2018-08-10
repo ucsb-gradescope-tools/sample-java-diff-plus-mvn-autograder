@@ -93,7 +93,8 @@ In each case, look at the file `results.json` to see whether it reflects what yo
    
 * Clone the [link-gs-zip-with-repo](https://github.com/ucsb-gradescope-tools/link-gs-zip-with-repo).
 * In that repo, edit `env.sh` to point to your repo.  You don't need to commit that change.
-* Run the script `./make_deploy_keys.sh` and upload your deploy key to the new repo you created for your assignment.
+* Run the script `./make_deploy_keys.sh` 
+* **Upload your deploy key** to the new repo you created for your assignment.
 * Run the script `./make_autograder_zip.sh` and then upload the `Autograder.zip` to Gradescope.
 
 You are now ready to test your autograded assignment.
