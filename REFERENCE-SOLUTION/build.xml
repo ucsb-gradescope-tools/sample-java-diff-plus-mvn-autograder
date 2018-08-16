@@ -39,10 +39,10 @@
   </target>
 
   <target name="jar" depends="compile" description="create a jar file">
-    <jar destfile="build/rational.jar">
+    <jar destfile="build/My-Project.jar">
       <fileset dir="build" includes="*.class"/>
       <manifest>
-	<attribute name="Main-Class" value="Rational"/>
+	<attribute name="Main-Class" value="Hello"/>
       </manifest>
     </jar>
   </target>

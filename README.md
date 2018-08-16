@@ -1,6 +1,6 @@
-# sample-python-diff-autograder
+# sample-java-diff-plus-ant-autograder
 
-This is a sample autograder for a Python assignment similar to the C++ assignment described [here](https://github.com/ucsb-gradescope-tools/sample-cpp-assignment).
+This is a sample autograder for a Javan assignment that uses both diff based testing and ant JUnit based testing.
 
 # Platform specific notes
 
@@ -12,7 +12,7 @@ Editing bash scripts (e.g. `diffs.sh`) on Windows will convert the line endings 
 
 ## EXECUTION-FILES
 
-Any extra files (e.g. data files) that should be in the same directory as the student submission while the submission is being executed. In this repo, the EXECUTION-FILES directory has `input.txt` file from the provided-files directory in the [assignment repo](https://github.com/ucsb-gradescope-tools/sample-cpp-assignment).
+Any extra files (e.g. data files) that should be in the same directory as the student submission while the submission is being executed.    If there is an instructor supplied build.xml, instructor supplied test cases, etc. those should go here.
 
 
 ## REFERENCE-SOLUTION
@@ -26,9 +26,6 @@ A bash script that creates the expected test output using the reference solution
 ## `apt-get.sh`
 A bash script for installing any necessary dependencies for the assignment.
 
-## `requirements.txt`
-A list (newline-separated) of any Python packages that need to be installed.
-
 ## requirements3<i></i>.txt
 A list (newline-separated) of any **Python 3** packages that need to be installed.
 
@@ -38,22 +35,20 @@ A bash script describing the tests to be run. See [this page](https://github.com
 
 ## grade<i></i>.sh
 
-A bash script for generating the results of the student submission. At the top of this file, you must specify the expected student submisson files. This assignment expects files countToN.py, helloFile.py, helloWorld.py, helloStderr.py, readFile.py, and readStdin.py. Thus, grade.sh begins with:
+A bash script for generating the results of the student submission. At the top of this file, you must specify the expected student submisson files. 
 
-> EXPECTED_FILES="countToN.py helloFile.py helloWorld.py helloStderr.py readFile.py readStdin.py "
-
-
+> EXPECTED_FILES="Assignment.java Hello.java"
 
 # Instructions
 
 ## Step 1: Clone this template
 
-* Create a new empty private repo, e.g. with the name PRIVATE-cs8-s18-labxx-gs
+* Create a new empty private repo, e.g. with the name PRIVATE-cs56-m18-labxx-gs
 * Clone the empty repo with `git clone <url>`
 *  `cd` into that directory:
-   > `cd PRIVATE-cs8-s18-labxx-gs`
+   > `cd PRIVATE-cs56-m18-labxx-gs`
 * Add a remote for this sample repo via: 
-   > `git remote add template git@github.com:ucsb-gradescope-tools/sample-python-diff-autograder.git`
+   > `git remote add template git@github.com:ucsb-gradescope-tools/sample-java-diff-ant-autograder.git`
 * Pull from this sample repo via `git pull template master`
 * Push to origin with `git push origin master`
 
@@ -70,13 +65,14 @@ A bash script for generating the results of the student submission. At the top o
 
 * Put a reference solution into REFERENCE-SOLUTION
 
-## Step 3: Test your autograder locally (optional)
+
+## TODO: ADD STEPS FOR THE JUNIT GRADING HERE
+
+## Step 4: Test your autograder locally (optional)
 
 To test your autograder locally:
 
-
 Try putting a correct sample solution in the SAMPLE-SOLUTION-1 directory and an incorrect sample solution in the SAMPLE-SOLUTION-2 directory.  (You have the option of creating additional SAMPLE-SOLUTION-nn directories, as few or as many as you see fit if you want to test a wider range of solution possibilities.)
-
 
 To check what will happen, run:
 * First, run `./MAKE-REFERENCE.sh` to generate the output of the reference solution

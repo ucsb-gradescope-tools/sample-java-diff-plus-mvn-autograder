@@ -6,7 +6,7 @@ echo "Downloading the Gradescope gs-diff-based-testing tools"
 copy_files_from_dir_if_it_exists () {
 
     if [ -d $1 ]; then
-	cp -v $1/* .
+	cp -vr $1/* .
     fi
 
 }
@@ -24,8 +24,8 @@ mkdir -p MAKE-REFERENCE-OUTPUT
 
 cd MAKE-REFERENCE-OUTPUT
 
+copy_files_from_dir_if_it_exists ../REFERENCE-SOLUTION
 copy_files_from_dir_if_it_exists ../EXECUTION-FILES
 copy_files_from_dir_if_it_exists ../BUILD-FILES
-copy_files_from_dir_if_it_exists ../REFERENCE-SOLUTION
 
 ${DIFF_TOOLS}/grade-diffs.py -r ../diffs.sh 

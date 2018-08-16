@@ -1,6 +1,6 @@
 #!/bin/sh
 
-EXPECTED_FILES="Hello.java"
+EXPECTED_FILES="src"
 
 DIFF_TOOLS=gs-diff-based-testing
 
@@ -32,7 +32,7 @@ fi
 
 copy_files_from_dir_if_it_exists () {
     if [ -d $1 ]; then
-        cp -v $1/* .
+        cp -rv $1/* .
     fi
 }
 
@@ -46,7 +46,11 @@ copy_files_from_dir_if_it_exists ../BUILD-FILES
 
 for f in $EXPECTED_FILES; do
     if [ -f $SUBMISSION_SOURCE/$f ]; then
+	echo "Copying $f to ."
         cp -v $SUBMISSION_SOURCE/$f .
+    elif [ -d $SUBMISSION_SOURCE/$f ]; then
+	echo "Rsync'ing $f to ."
+        rsync -trv $SUBMISSION_SOURCE/$f .
     else
         echo "WARNING: Expected file $f not found in $SUBMISSION_SOURCE"
     fi
@@ -54,6 +58,10 @@ done
 
 
 rm -f results.json
+echo "We are in directory:" `pwd`
+
+echo "About to call grade-diffs"
+
 ../${DIFF_TOOLS}/grade-diffs.py ../diffs.sh 
 
 if [ -d /autograder/results ]; then

@@ -1,11 +1,25 @@
 #!/usr/bin/env bash
 
 #@test{"stdout":20, "stderr": 20}
-ls -1 Hello.java
+ls -1 src/Hello.java
 
-#@test{"stdout":5, "stderr": 15}
-javac Hello.java
+ant -f instructor-build.xml clean
 
-#@test{"stdout":20, "stderr":20}
-java Hello
+#@test{"return":10}
+ant -f instructor-build.xml compile
+
+#@test{"return":10}
+ant -f instructor-build.xml jar
+
+#@test{"stdout":20, "stderr": 20}
+ls -1 build/My-Project.jar 
+
+#@test{"stdout":20, "stderr": 20}
+java -cp build/My-Project.jar Hello
+
+
+
+
+
+
 
