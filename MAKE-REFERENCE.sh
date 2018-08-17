@@ -6,7 +6,17 @@ echo "Downloading the Gradescope gs-diff-based-testing tools"
 copy_files_from_dir_if_it_exists () {
 
     if [ -d $1 ]; then
-	cp -vr $1/* .
+	for f in $1/*; do
+	    if [ -f $f ]; then
+		echo "Copying $f to ."
+		cp -v $f .
+	    elif [ -d $f ]; then
+		echo "Rsync'ing $f to ."
+		rsync -trv $f .
+	    else
+		echo "WARNING: THIS SHOULD NOT HAPPEN... \$f=$f \$1=$1"
+	    fi
+	done
     fi
 
 }

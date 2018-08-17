@@ -57,12 +57,18 @@ for f in $EXPECTED_FILES; do
 done
 
 
-rm -f results.json
-echo "We are in directory:" `pwd`
+/bin/rm -fv *-results.json
+/bin/rm -fv results.json
 
-echo "About to call grade-diffs"
+../${DIFF_TOOLS}/grade-diffs.py ../diffs.sh -o diff-results.json
 
-../${DIFF_TOOLS}/grade-diffs.py ../diffs.sh 
+# NOW DO THE UNIT TEST STUFF
+
+../unittest.sh   # this writes to ./unittest-results.json
+
+# NOW COMBINE THE FILES AND COPY TO FINAL LOCATION
+
+../${DIFF_TOOLS}/combine-results-json.py *-results.json -o results.json
 
 if [ -d /autograder/results ]; then
     cp -v results.json /autograder/results/results.json
