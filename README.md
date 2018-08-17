@@ -65,6 +65,14 @@ A bash script for generating the results of the student submission. At the top o
 
 * Put a reference solution into REFERENCE-SOLUTION
 
+### Hints
+
+This emacs query-replace-regexp may be useful:
+
+```
+OLD: public void test_\([^{]+\){ 
+NEW: @GradedTest(name="\1", max_score=1)^J     public void test_\1 {)
+```
 
 ## TODO: ADD STEPS FOR THE JUNIT GRADING HERE
 
