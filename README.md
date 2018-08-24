@@ -1,6 +1,6 @@
-# sample-java-diff-plus-ant-autograder
+# sample-java-diff-plus-mvn-autograder
 
-This is a sample autograder for a Javan assignment that uses both diff based testing and ant JUnit based testing.
+This is a sample autograder for a Javan assignment that uses both diff based testing and mvn JUnit based testing.
 
 # Platform specific notes
 
@@ -48,7 +48,7 @@ A bash script for generating the results of the student submission. At the top o
 *  `cd` into that directory:
    > `cd PRIVATE-cs56-m18-labxx-gs`
 * Add a remote for this sample repo via: 
-   > `git remote add template git@github.com:ucsb-gradescope-tools/sample-java-diff-ant-autograder.git`
+   > `git remote add template git@github.com:ucsb-gradescope-tools/sample-java-diff-mvn-autograder.git`
 * Pull from this sample repo via `git pull template master`
 * Push to origin with `git push origin master`
 

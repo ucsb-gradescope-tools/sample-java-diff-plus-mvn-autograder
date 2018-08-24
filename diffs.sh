@@ -1,21 +1,27 @@
 #!/usr/bin/env bash
 
-#@test{"stdout":20, "stderr": 20}
-ls -1 src/Hello.java
+#@test{"stdout":1, "stderr": 1}
+ls -1 src/main/java/edu/ucsb/cs56/pconrad/m18_labxx/Hello.java
 
-ant -f instructor-build.xml clean
+#@test{"stdout":1, "stderr": 1}
+ls -1 src/main/java/edu/ucsb/cs56/pconrad/m18_labxx/Assignment.java
 
-#@test{"return":10}
-ant -f instructor-build.xml compile
+#@test{"stdout":1, "stderr": 1}
+ls -1 pom.xml
 
-#@test{"return":10}
-ant -f instructor-build.xml jar
+mvn -f instructor-pom.xml clean
 
-#@test{"stdout":20, "stderr": 20}
-ls -1 build/My-Project.jar 
+#@test{"return":1}
+mvn -f instructor-pom.xml compile
 
-#@test{"stdout":20, "stderr": 20}
-java -cp build/My-Project.jar Hello
+#@test{"return":1,"timeout":10}
+mvn -f instructor-pom.xml package
+
+#@test{"stdout":1, "stderr": 1, "return":1}
+ls -1 target/m18_labxx-1.0-SNAPSHOT.jar
+
+#@test{"stdout":1, "stderr": 1}
+java -cp target/m18_labxx-1.0-SNAPSHOT.jar edu.ucsb.cs56.pconrad.m18_labxx.Hello
 
 
 

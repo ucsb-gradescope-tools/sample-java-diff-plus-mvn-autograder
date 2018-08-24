@@ -1,0 +1,151 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+
+  <!-- model version - always 4.0.0 for Maven 2.x POMs -->
+  <modelVersion>4.0.0</modelVersion>
+
+  <!-- project coordinates - values which uniquely identify this project -->
+  <groupId>edu.ucsb.cs56.pconrad.m18_labxx</groupId>
+  <artifactId>m18_labxx</artifactId>
+  <name>m18_labxx</name>
+  <url>https://ucsb-cs56-m18.github.io/STARTER-labxx</url>
+
+  <!-- configure what mvn package produces -->
+  
+  <packaging>jar</packaging>
+  <version>1.0-SNAPSHOT</version>  
+
+  <!-- what version of Java should we use and what encoding for files? -->
+  <properties>
+    <maven.compiler.source>1.8</maven.compiler.source>
+    <maven.compiler.target>1.8</maven.compiler.target>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+  </properties>
+
+  
+  <!-- what other software does our project depend on (third-party JARs, etc.) -->
+  <dependencies>
+    
+    <dependency>
+      <groupId>gradescope</groupId>
+      <artifactId>jh61b</artifactId>
+      <version>1.0</version>
+      <scope>test</scope>
+    </dependency>
+    
+    <!-- JUnit unit testing (https://junit.org/) -->
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <version>4.12</version>
+      <scope>test</scope>
+    </dependency>
+
+    <!-- Test coverage ( https://www.eclemma.org/jacoco/ )-->
+    <dependency>
+      <groupId>org.jacoco</groupId>
+      <artifactId>jacoco-maven-plugin</artifactId>
+      <version>0.8.0</version>
+    </dependency>
+
+  </dependencies>
+
+  <!-- For use with github pages, to publish the site to the /docs subdirectory -->
+  <distributionManagement>
+    <site>
+      <id>website</id>
+      <url>file://${project.basedir}/docs/</url>
+    </site>
+  </distributionManagement>
+
+  
+  <build>
+
+    <plugins>
+
+      <!-- Make jar file executable AND include tests file (see https://maven.apache.org/plugins/maven-jar-plugin/examples/create-test-jar.html) -->
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-jar-plugin</artifactId>
+        <version>3.1.0</version>
+        <configuration>
+          <archive>
+            <manifest>
+              <!-- full package name of class with the main you want to run -->
+              <mainClass>edu.ucsb.cs56.pconrad.m18_labxx.RunTests</mainClass>
+            </manifest>
+          </archive>
+        </configuration>
+	<executions>
+          <execution>
+            <goals>
+              <goal>test-jar</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+      
+      <!-- Test case coverage report -->
+      <plugin>
+	<groupId>org.jacoco</groupId>
+	<artifactId>jacoco-maven-plugin</artifactId>
+	<version>0.7.7.201606060606</version>
+	<executions>
+          <execution>
+            <goals>
+              <goal>prepare-agent</goal>
+            </goals>
+          </execution>
+          <execution>
+            <id>report</id>
+            <phase>prepare-package</phase>
+            <goals>
+              <goal>report</goal>
+            </goals>
+          </execution>
+	</executions>
+      </plugin>      
+
+
+      <plugin>
+	<groupId>org.apache.maven.plugins</groupId>
+	<artifactId>maven-install-plugin</artifactId>
+	<version>2.4</version>
+	<executions>
+          <execution>
+            <phase>initialize</phase>
+            <goals>
+              <goal>install-file</goal>
+            </goals>
+            <configuration>
+              <groupId>gradescope</groupId>
+              <artifactId>jh61b</artifactId>
+              <version>1.0</version>
+              <packaging>jar</packaging>
+              <file>${basedir}/lib/jh61b-1.0.jar</file>
+            </configuration>
+          </execution>
+	</executions>
+      </plugin>
+
+      <plugin>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>exec-maven-plugin</artifactId>
+        <version>1.2.1</version>
+        <executions>
+          <execution>
+            <goals>
+              <goal>java</goal>
+            </goals>
+          </execution>
+        </executions>
+        <configuration>
+          <mainClass>edu.ucsb.cs56.pconrad.m18_labxx.RunTests</mainClass>
+        </configuration>
+      </plugin>
+      
+    </plugins>
+    
+  </build>
+
+</project>
